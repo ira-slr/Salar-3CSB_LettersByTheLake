@@ -78,14 +78,19 @@ function App() {
 
   const handleChoiceSelect = (selectedOption) => {
     const followUpEvents = selectedOption.followUp;
-
-    setEventQueue((prevQueue) => {
-      const before = prevQueue.slice(0, eventIndex);
-      const after = prevQueue.slice(eventIndex + 1);
-      return [...before, ...followUpEvents, ...after];
-    });
-
     setCurrentChoices(null);
+
+    if (selectedOption.isBranch) {
+      setEventQueue(followUpEvents);
+      setEventIndex(0);
+
+    } else {
+      setEventQueue((prevQueue) => {
+        const before = prevQueue.slice(0, eventIndex);
+        const after = prevQueue.slice(eventIndex + 1);
+        return [...before, ...followUpEvents, ...after];
+      });
+    }
   };
 
   const handleStartGame = () => {
