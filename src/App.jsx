@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import MainMenu from './components/MainMenu';
 import Game from './components/Game';
-import { script } from './script';
+import { script } from './script'; // Make sure script is imported
 
 function App() {
   const [gameState, setGameState] = useState('menu');
@@ -16,6 +16,10 @@ function App() {
   const [currentChoices, setCurrentChoices] = useState(null);
 
   const currentEvent = eventQueue[eventIndex];
+
+  // --- NEW CODE: Find the first background ---
+  const firstBackground = 
+    script.find(event => event.type === 'background')?.description || '';
 
   useEffect(() => {
     if (!currentEvent) {
@@ -41,7 +45,7 @@ function App() {
         break;
       case 'picture':
         setCurrentPicture(currentEvent.description);
-        advance();
+        advance(); // Pictures can be instant
         break;
       case 'title':
         setCurrentTitle(currentEvent.text);
@@ -65,7 +69,7 @@ function App() {
 
   const handleNextClick = () => {
     if (currentChoices) return;
-    
+
     if (currentTitle) {
       advance();
       return;
@@ -78,13 +82,16 @@ function App() {
 
   const handleChoiceSelect = (selectedOption) => {
     const followUpEvents = selectedOption.followUp;
+
+    // Hide the choice box immediately
     setCurrentChoices(null);
 
     if (selectedOption.isBranch) {
+      // --- THIS IS A HARD BRANCH ---
       setEventQueue(followUpEvents);
       setEventIndex(0);
-
     } else {
+      // --- THIS IS A "FLAVOR" CHOICE ---
       setEventQueue((prevQueue) => {
         const before = prevQueue.slice(0, eventIndex);
         const after = prevQueue.slice(eventIndex + 1);
@@ -93,20 +100,20 @@ function App() {
     }
   };
 
+  // --- UPDATED FUNCTION ---
   const handleStartGame = () => {
     setGameState('playing');
-    const firstEvent = eventQueue[0];
-    if (firstEvent.type === 'background') {
-      setCurrentBackground(firstEvent.description);
-      setEventIndex(1);
-    }
+    // Set the background immediately
+    setCurrentBackground(firstBackground);
+    // Reset event index to start from 0
+    setEventIndex(0);
   };
 
   const handleRestart = () => {
     setGameState('menu');
     setEventIndex(0);
     setEventQueue(script);
-    setCurrentBackground('');
+    setCurrentBackground(''); // Will be reset on start
     setCurrentPicture(null);
     setCurrentTitle(null);
     setCurrentDialogue(null);
@@ -115,7 +122,8 @@ function App() {
   };
 
   if (gameState === 'menu') {
-    return <MainMenu onStartGame={handleStartGame} />;
+    // --- UPDATED LINE: Pass the background as a prop ---
+    return <MainMenu onStartGame={handleStartGame} background={firstBackground} />;
   }
 
   if (gameState === 'finished') {

@@ -25,6 +25,19 @@ body {
   align-items: center;
 }
 
+/* --- NEW STYLE FOR MENU BACKGROUND --- */
+.menu-background {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-image 0.5s ease-in-out;
+}
+
+/* --- MODIFIED MENU & END SCREENS --- */
 .main-menu,
 .finished-screen {
   display: flex;
@@ -33,12 +46,19 @@ body {
   align-items: center;
   gap: 2rem;
   text-align: center;
+
+  /* Added lines for better readability on a background */
+  background: rgba(0, 0, 0, 0.6);
+  padding: 2.5rem 4rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
 .main-menu h1,
 .finished-screen h1 {
   font-size: 3rem;
   font-weight: 300;
+  margin: 0; /* Added margin reset */
 }
 
 button {
@@ -61,19 +81,29 @@ button:hover {
   height: 100%;
   position: relative;
   overflow: hidden;
-  background-color: #333;
+  background-color: #333; /* Fallback color */
 }
 
+/* --- MODIFIED BACKGROUND DISPLAY --- */
 .background-display {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+
+  /* These lines will now show the actual image */
   background-size: cover;
   background-position: center;
-  z-index: 1;
   transition: background-image 0.5s ease-in-out;
+}
+/* This old p-tag style is no longer needed */
+.background-display p {
+  display: none;
 }
 
 .dialogue-box {
@@ -81,7 +111,7 @@ button:hover {
   bottom: 2vh;
   left: 2vw;
   right: 2vw;
-  min-height: 20vh;
+  min-height: 20vh; /* Use min-height */
   background: var(--dialogue-bg);
   border: 2px solid #fff;
   border-radius: 10px;
@@ -158,9 +188,10 @@ button:hover {
   padding: 2rem 3rem;
   border-radius: 10px;
   text-align: center;
-  color: #fff;
+  color: #fff; /* Ensure text is visible */
 }
 
+/* Style for the new <img> tag */
 .picture-display img {
   display: block;
   max-width: 60vw;
