@@ -24,7 +24,7 @@ function Game({
       />
 
       <PictureDisplay description={picture} />
-      <TitleDisplay text={title} />
+      <TitleDisplay text={title} onNext={onNext} />
 
       <ChoiceBox options={choices} onSelect={onSelectChoice} />
 
