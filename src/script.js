@@ -1,5 +1,3 @@
-// src/script.js
-
 export const script = [
   // --- SCENE 1: ARRIVING IN WILLOWBROOK ---
   {
@@ -8,7 +6,7 @@ export const script = [
   },
   {
     type: 'background',
-    description: '/images/willowbrook-town.jpg',
+    description: '/images/willowbrook-town.png',
   },
   {
     type: 'narration',
@@ -64,7 +62,7 @@ export const script = [
   // --- SCENE 2: INSIDE THE POST OFFICE ---
   {
     type: 'background',
-    description: '/images/post-office.jpg',
+    description: '/images/post-office.png',
   },
   {
     type: 'narration',
@@ -166,7 +164,7 @@ export const script = [
   // --- SCENE 3: FIRST DELIVERY WALK ---
   {
     type: 'background',
-    description: '/images/lakeside-path.jpg',
+    description: '/images/lakeside-path.png',
   },
   {
     type: 'narration',
@@ -202,10 +200,10 @@ export const script = [
     ],
   },
 
-  // --- SCENE 4: FIRST DELIVERY: MATEO ON THE DOCK ---
+// --- SCENE 4: FIRST DELIVERY: MATEO ON THE DOCK ---
   {
     type: 'background',
-    description: '/images/mateo-dock.jpg',
+    description: '/images/mateo-dock.png',
   },
   {
     type: 'dialogue',
@@ -217,14 +215,14 @@ export const script = [
     character: 'CASS',
     text: 'Delivery for Mateo Reyes. No secrets included. Probably.',
   },
-  {
+  { // <--- THIS IS YOUR "CHOICE 5"
     type: 'choice',
     options: [
       {
         text: '“Nice place you’ve got here.”',
         followUp: [
           {
-            type: 'dialogdialogue',
+            type: 'dialogue', 
             character: 'MATEO',
             text: 'The lake’s the real landlord — I just borrow the view.',
           },
@@ -265,7 +263,7 @@ export const script = [
   // --- SCENE 5: END OF DAY AT THE POST OFFICE ---
   {
     type: 'background',
-    description: '/images/post-office-evening.jpg',
+    description: '/images/post-office-evening.png',
   },
   {
     type: 'narration',
@@ -276,7 +274,7 @@ export const script = [
     character: 'NORA',
     text: 'How was day one? Still breathing?',
   },
-  {
+  { // <--- THIS IS YOUR "CHOICE 6"
     type: 'choice',
     options: [
       {
